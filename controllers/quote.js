@@ -1,4 +1,8 @@
 exports.postQuote = (req, res, next) => {
+    const driver_birthdate = req.body.driver_birthdate;
+    const car_value = req.body.car_value;
+    console.log(car_value);
+    console.log(driver_birthdate);
     if (badParameters) {
         res.status(400).json({
             "success": false,
