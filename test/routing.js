@@ -1,6 +1,6 @@
 const expect = require('chai').expect;
 
-const app = require('../app.js');
+const app = require('../app');
 
 describe('Routes', function() {
     it('should not return a 404 error when doing a POST request to localhost:8080/api/v1/quote/car-insurance', function() {
