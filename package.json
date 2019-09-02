@@ -17,7 +17,7 @@
     "url": "https://github.com/Bcavez/seraphin-challenge"
   },
   "scripts": {
-    "test": "mocha",
+    "test": "mocha --exit",
     "start": "nodemon app.js"
   },
   "author": "B Cavez",

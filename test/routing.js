@@ -7,15 +7,14 @@ const app = require('../app');
 chai.use(chaiHttp);
 
 describe('Routes', function() {
-    it('should not return a 404 error when doing a POST request to localhost:8080/api/v1/quote/car-insurance', () => {
+    it('should not return a 404 error when doing a POST request to localhost:8080/api/v1/quote/car-insurance', (done) => {
         const path = '/api/v1/quote/car-insurance'
-        // const path = 'http://localhost:8080/api/v1/quote/car-insurance'
         chai.request(app)
         .post(path)
         .send('asd')
         .end((err, res) => {
-            expect(res).to.not.throw(err);
+            expect(res).to.not.have.status(404);
+            done();
         });
-        // expect(app.use(path)).to.not.throw('404 (not found)')
     });
 });
