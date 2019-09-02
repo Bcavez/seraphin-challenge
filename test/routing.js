@@ -6,7 +6,7 @@ const app = require('../app');
 
 chai.use(chaiHttp);
 
-describe('Routes', function() {
+describe('Routes', () => {
     it('should not return a 404 error when doing a POST request to localhost:8080/api/v1/quote/car-insurance', (done) => {
         const path = '/api/v1/quote/car-insurance'
         chai.request(app)
