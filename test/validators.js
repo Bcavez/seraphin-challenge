@@ -32,11 +32,33 @@ describe('Validator', () => {
                 expect(res).to.have.status(400);
             });
         });
+        it('should return a 400 when the car_value is an impossibly high number', () => {
+            chai.request(app)
+            .post(path)
+            .send({
+                "not_car_value": 100000000000000000000000000000000.00,
+                "driver_birthdate": "13/02/1989"	
+            })
+            .end((err, res) => {
+                expect(res).to.have.status(400);
+            });
+        });
+        it('should return a 400 when the car_value is a negative number', () => {
+            chai.request(app)
+            .post(path)
+            .send({
+                "not_car_value": -1000.00,
+                "driver_birthdate": "13/02/1989"	
+            })
+            .end((err, res) => {
+                expect(res).to.have.status(400);
+            });
+        });
         it('should return a 200 when the car_value is a float', () => {
             chai.request(app)
             .post(path)
             .send({
-                "car_value": 123.456,
+                "car_value": 123.45,
                 "driver_birthdate": "13/02/1989"	
             })
             .end((err, res) => {
