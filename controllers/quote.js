@@ -10,15 +10,11 @@ exports.postQuote = (req, res, next) => {
             "message": "parameters missing or incorrect values"
         });
     };
+    // pass the driver_birthdate and car_value to the Driver model which will make the computation using the functions defined in the model.
     const driver = new Driver(req.body.driver_birthdate, req.body.car_value);
     const age = driver.age;
     const civil_liability = driver.civil_liability();
     const omnium = driver.omnium();
-    // test --
-    console.log(age);
-    console.log(civil_liability);
-    console.log(omnium);
-    // --
     if (age >= 18) {
         res.status(200).json({
             "success": true,
