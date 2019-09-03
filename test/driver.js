@@ -41,8 +41,8 @@ describe('omnium', () => {
         const driver = new Driver("02/09/1998", 1000.00);
         expect(driver.omnium()).to.equal(30);
     });
-    it('should return 3703.68 if the value of the car is 123456.78', () => {
+    it('should return 3703.70 if the value of the car is 123456.78', () => {
         const driver = new Driver("02/09/1998", 123456.78);
-        expect(driver.omnium()).to.equal(3703.70);
+        expect(driver.omnium()).to.equal(3703.7);
     });
 });

@@ -22,6 +22,6 @@ module.exports = class Driver {
     }
 
     omnium() {
-        return (this.car_value / 100) * 3;
+        return +((this.car_value / 100) * 3).toFixed(2);
     }
 }
