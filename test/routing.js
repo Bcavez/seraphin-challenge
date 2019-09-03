@@ -11,7 +11,6 @@ describe('Routes', () => {
         const path = '/api/v1/quote/car-insurance'
         chai.request(app)
         .post(path)
-        .send('asd')
         .end((err, res) => {
             expect(res).to.not.have.status(404);
             done();
