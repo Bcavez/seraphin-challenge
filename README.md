@@ -1,5 +1,5 @@
 # seraphin-challenge API
-This API was build for the Seraphin challenge
+This API was built for the Seraphin challenge
 
 ## Specs of the challenge:
 
