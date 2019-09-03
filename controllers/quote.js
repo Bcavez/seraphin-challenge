@@ -1,5 +1,7 @@
 const { validationResult } = require('express-validator');
 
+const Driver = require('../models/driver');
+
 exports.postQuote = (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
