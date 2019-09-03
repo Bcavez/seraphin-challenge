@@ -13,3 +13,21 @@ describe('age computation', () => {
         expect(driver.age()).to.equal(18);
     });
 });
+
+describe('civil liability', () => {
+    it('should return 1000 if the driver is less than 26 years old', () => {
+        const driver = new Driver("02/09/1998", 1000.00);
+        driver.age = 20;
+        expect(driver.civil_liability()).to.equal(1000);
+    });
+    it('should return 100 if the driver is 25 years old', () => {
+        const driver = new Driver("02/09/1998", 1000.00);
+        driver.age = 25
+        expect(driver.civil_liability()).to.equal(100);
+    });
+    it('should return 500 if the driver is 26 years old or older', () => {
+        const driver = new Driver("02/09/1998", 1000.00);
+        driver.age = 26
+        expect(driver.civil_liability()).to.equal(500);
+    });
+});
