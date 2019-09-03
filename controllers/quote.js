@@ -9,22 +9,21 @@ exports.postQuote = (req, res, next) => {
             "success": false,
             "message": "parameters missing or incorrect values"
         });
-    }
-    // test --
-    const driver_birthdate = req.body.driver_birthdate;
-    const car_value = req.body.car_value;
-    console.log(car_value);
-    console.log(driver_birthdate);
-    // --
-    if (dummyAgeComputation >= 18) {
+    };
+    // pass the driver_birthdate and car_value to the Driver model which will make the computation using the functions defined in the model.
+    const driver = new Driver(req.body.driver_birthdate, req.body.car_value);
+    const age = driver.age;
+    const civil_liability = driver.civil_liability();
+    const omnium = driver.omnium();
+    if (age >= 18) {
         res.status(200).json({
             "success": true,
             "message": "quote successfully computed",
             "data": {
                 "eligible": true,
                 "premiums": {
-                    "civil_liability": 1000.00,
-                    "omnium": 702.4
+                    "civil_liability": civil_liability,
+                    "omnium": omnium
                 }
             }
         });
@@ -39,5 +38,3 @@ exports.postQuote = (req, res, next) => {
         });
     };
 };
-
-const dummyAgeComputation = 25
