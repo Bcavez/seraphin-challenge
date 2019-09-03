@@ -59,14 +59,129 @@ describe('car_value', () => {
     });
 });
 
-describe('Controller response content', () => {
-    it('should return "eligibility false" in the data when the driver is under 18 years of age', () => {
-        //eligbility false
+describe('driver_birthdate', () => {
+    describe('400', () => {
+        it('should return a 400 when the driver_birthdate is not a string', () => {
+            //400
+            chai.request(app)
+            .post(path)
+            .send({
+                "car_value": 1000.00,
+                "driver_birthdate": 13021989	
+            })
+            .end((err, res) => {
+                expect(res).to.have.status(400);
+            });
+        });
+        it('should return a 400 when the driver_birthdate is not present in the request', () => {
+            //400
+            chai.request(app)
+            .post(path)
+            .send({
+                "car_value": 1000.00,
+                "not_driver_birthdate": "13/02/1989"	
+            })
+            .end((err, res) => {
+                expect(res).to.have.status(400);
+            });
+        });
+        it('should return a 400 when the driver_birthdate does not have a valid format', () => {
+            //400
+            chai.request(app)
+            .post(path)
+            .send({
+                "car_value": 1000.00,
+                "driver_birthdate": "1989/01/01"	
+            })
+            .end((err, res) => {
+                expect(res).to.have.status(400);
+            });
+        });
+        it('should return a 400 when the driver_birthdate does not use /slash/', () => {
+            //400
+            chai.request(app)
+            .post(path)
+            .send({
+                "car_value": 1000.00,
+                "driver_birthdate": "13-02-1989"	
+            })
+            .end((err, res) => {
+                expect(res).to.have.status(400);
+            });
+        });
+        it('should return a 400 when the driver_birthdate does not have a valid day', () => {
+            //400
+            chai.request(app)
+            .post(path)
+            .send({
+                "car_value": 1000.00,
+                "driver_birthdate": "32/02/1989"	
+            })
+            .end((err, res) => {
+                expect(res).to.have.status(400);
+            });
+        });
+        it('should return a 400 when the driver_birthdate does not have a valid month', () => {
+            //400
+            chai.request(app)
+            .post(path)
+            .send({
+                "car_value": 1000.00,
+                "driver_birthdate": "13/13/1989"	
+            })
+            .end((err, res) => {
+                expect(res).to.have.status(400);
+            });
+        });
+        it('should return a 400 when the driver_birthdate does not have a valid year', () => {
+            //400
+            chai.request(app)
+            .post(path)
+            .send({
+                "car_value": 1000.00,
+                "driver_birthdate": "13/02/91989"	
+            })
+            .end((err, res) => {
+                expect(res).to.have.status(400);
+            });
+        });
+        it('should return a 400 when the birthdate is on the 29th February of a non-leap year', () => {
+            //200
+            chai.request(app)
+            .post(path)
+            .send({
+                "car_value": 1000.00,
+                "driver_birthdate": "29/02/2017"	
+            })
+            .end((err, res) => {
+                expect(res).to.have.status(400);
+            });
+        });
     });
-    it('should return "eligibility true" in the data when the driver is 18 years of age or older', () => {
-        //eligibility true
+    describe('200', () => {
+        it('should return a 200 with a good birthdate', () => {
+            //200
+            chai.request(app)
+            .post(path)
+            .send({
+                "car_value": 1000.00,
+                "driver_birthdate": "13/02/1989"	
+            })
+            .end((err, res) => {
+                expect(res).to.have.status(200);
+            });
+        });
+        it('should return a 200 when the birthdate is on the 29th February of a leap year', () => {
+            //200
+            chai.request(app)
+            .post(path)
+            .send({
+                "car_value": 1000.00,
+                "driver_birthdate": "29/02/2016"	
+            })
+            .end((err, res) => {
+                expect(res).to.have.status(200);
+            });
+        });
     });
-    // it('should return the correct computation in the data premiums', () => {
-    //     //check if computation are correctly passed
-    // });
 });
