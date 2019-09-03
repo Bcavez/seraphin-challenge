@@ -1,4 +1,4 @@
-const express = require ('express');
+const express = require('express');
 
 const quoteController = require('../controllers/quote');
 const validator = require('./validation/quote');
