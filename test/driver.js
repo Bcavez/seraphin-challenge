@@ -12,6 +12,10 @@ describe('age computation', () => {
         const driver = new Driver("02/09/2001", 1000.00);
         expect(driver.age).to.equal(18);
     });
+    it('should return 100 if the driver is born 100 years ago', () => {
+        const driver = new Driver("02/09/1919", 1000.00);
+        expect(driver.age).to.equal(100);
+    });
 });
 
 describe('civil liability', () => {
