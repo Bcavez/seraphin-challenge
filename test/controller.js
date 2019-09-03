@@ -4,14 +4,28 @@ const chaiHttp = require('chai-http');
 
 const app = require('../app');
 
+const path = '/api/v1/quote/car-insurance'
+
 chai.use(chaiHttp);
 
 describe('Controller status response type', () => {
-    it('should return a 400 when the badParameters method returns false', () => {
+    it('should return a 400 when there are errors', () => {
         //400
+        const errors = [];
+        chai.request(app)
+        .post(path)
+        .end((err, res) => {
+            expect(res).to.have.status(400);
+        });
     });
-    it('should return a 200 when the badParameters method returns true', () => {
+    it('should return a 200 when there are no errors', () => {
         //200
+        const errors = ['this is not empty'];
+        chai.request(app)
+        .post(path)
+        .end((err, res) => {
+            expect(res).to.have.status(200);
+        });
     });
 });
 
